@@ -1,1 +1,1 @@
-all  projrcts are organised branch wise
+all  projects are organised branch wise
