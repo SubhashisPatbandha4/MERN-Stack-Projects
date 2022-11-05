@@ -1,1 +1,1 @@
-it is a basic lofin and register project in mern stack
+all  projrcts are organised branch wise
