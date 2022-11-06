@@ -1,3 +1,4 @@
+const jwt = require("jsonwebtoken")
 const express = require("express");
 const User = require("../model/userSchema");
 const bcrypt = require("bcryptjs")
@@ -77,6 +78,8 @@ router.post("/login", async (req, resp) => {
     const userLogin = await User.findOne({ email: email });
     if (userLogin) {
       const isMatch = await bcrypt.compare(password, userLogin.password);
+      const token = await userLogin.generateAuthToken()
+      console.log(token)
 
       if (isMatch) {
         resp.json({ message: "User signin successfully" });
