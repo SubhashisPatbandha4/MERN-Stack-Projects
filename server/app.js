@@ -14,7 +14,7 @@ const middleware = (req, resp, next) => {
   next();
 };
 app.get("/login", (req, resp) => {
-  resp.cookie("test","hello")
+  resp.cookie("test", "hello")
   resp.send("login from server")
 })
 
