@@ -13,7 +13,10 @@ const middleware = (req, resp, next) => {
   console.log("middlwwareeeeeeeeeeee");
   next();
 };
-
+app.get("/login", (req, resp) => {
+  resp.cookie("test","hello")
+  resp.send("login from server")
+})
 
 //middle ware
 

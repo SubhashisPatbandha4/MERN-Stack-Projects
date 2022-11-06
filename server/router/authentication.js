@@ -78,8 +78,12 @@ router.post("/login", async (req, resp) => {
     const userLogin = await User.findOne({ email: email });
     if (userLogin) {
       const isMatch = await bcrypt.compare(password, userLogin.password);
-      const token = await userLogin.generateAuthToken()
+      const token = await userLogin.generateAuthToken() //getting genereted token of logged in user
       console.log(token)
+      resp.cookie("jwtoken", token, {
+        expires: new Date(Date.now() + 25892000000),//mili seconds =30 days
+        httpOnly: true //to run it on normal http without secure also
+      })
 
       if (isMatch) {
         resp.json({ message: "User signin successfully" });
