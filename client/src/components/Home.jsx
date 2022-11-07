@@ -5,7 +5,7 @@ const Home = () => {
     <div>
       <p>welcome</p>
 
-      <h1>We are the mern developer</h1>
+      <h1>Home We are the mern developer</h1>
     </div>
   );
 };
