@@ -1,4 +1,25 @@
+
 .navlogo {
   height: 3rem;
+}
+.form-group {
+  margin-top: 2rem;
+  box-shadow: 1px 1px #888888;
+}
 
+.form-group input {
+  margin-left: 1rem;
+  border: none;
+  outline: none;
+  width: 90%;
+}
+.form-group input:focus {
+  background-color: beige;
+}
+.signup-coverImage {
+  height: 500px;
+}
+.signup-image-link {
+  /* color: blueviolet; */
+  text-decoration: none;
 }
