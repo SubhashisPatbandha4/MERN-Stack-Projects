@@ -1,10 +1,12 @@
 import React from "react";
 import { NavLink } from "react-router-dom"
 import loginCOVER from "../images/loginCover.jpg"
+import Navbar from './Navbar'
 
 const Login = () => {
   return (
     <>
+    <Navbar/>
       <section className="signup  ">
         <div className="container mt-5     shadow">
           <div className="signup-content row">
@@ -46,7 +48,7 @@ const Login = () => {
 
 
                 <div className="form-button mt-5">
-                  <input type="submit" name="signin" id="signin" className="form-submit btn btn-primary w-100 " value="Login" />
+                  <input type="submit" name="signin" id="signin" className="form-submit btn btn-primary w-100  " value="Login" />
                 </div>
               </form>
 

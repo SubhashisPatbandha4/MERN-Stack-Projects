@@ -1,9 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import registrationCOVER from "../images/registrationCOVER.jpg"
 import { NavLink } from "react-router-dom"
+import Navbar from './Navbar'
+
+
 const Signup = () => {
+
+  const [user, setUser] = useState({
+    name: "", email: "", phone: "", work: "", password: "", cpassword: ""
+  })
+  const handleInput = (e) => {
+    console.log(e)
+    let name, value;
+    name = e.target.name;
+    value = e.target.value;
+    setUser({
+      ...user, [name]: value
+    })
+  }
+
   return (
     <>
+      <Navbar />
       <section className="signup ">
         <div className="container mt-5     shadow">
           <div className="signup-content row">
@@ -14,7 +32,8 @@ const Signup = () => {
                   <label htmlFor="name" className="">
                     <i class="zmdi zmdi-account"></i>
                   </label>
-                  <input className=""
+                  <input value={user.name}
+                    onChange={handleInput}
                     type="text"
                     name="name"
                     id="name"
@@ -26,7 +45,8 @@ const Signup = () => {
                   <label htmlFor="email">
                     <i class="zmdi zmdi-email"></i>
                   </label>
-                  <input
+                  <input value={user.email}
+                    onChange={handleInput}
                     type="email"
                     name="email"
                     id="emails"
@@ -38,7 +58,8 @@ const Signup = () => {
                   <label htmlFor="phone">
                     <i class="zmdi zmdi-phone-in-talk"></i>
                   </label>
-                  <input
+                  <input value={user.phone}
+                    onChange={handleInput}
                     type="phone"
                     name="phone"
                     id="phone"
@@ -50,7 +71,8 @@ const Signup = () => {
                   <label htmlFor="work">
                     <i class="zmdi zmdi-slideshow"></i>
                   </label>
-                  <input
+                  <input value={user.work}
+                    onChange={handleInput}
                     type="text"
                     name="work"
                     id="work"
@@ -62,7 +84,8 @@ const Signup = () => {
                   <label htmlFor="password">
                     <i class="zmdi zmdi-lock"></i>
                   </label>
-                  <input
+                  <input value={user.password}
+                    onChange={handleInput}
                     type="password"
                     name="password"
                     id="password"
@@ -71,15 +94,16 @@ const Signup = () => {
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="password">
+                  <label htmlFor="cpassword">
                     <i class="zmdi zmdi-lock"></i>
                   </label>
-                  <input
+                  <input value={user.cpassword}
+                    onChange={handleInput}
                     type="password"
-                    name="password"
-                    id="password"
+                    name="cpassword"
+                    id="cpassword"
                     autoComplete="off"
-                    placeholder="your password"
+                    placeholder="your confirm password"
                   />
                 </div>
                 <div className="form-button mt-5">

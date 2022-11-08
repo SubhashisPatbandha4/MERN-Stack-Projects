@@ -44,6 +44,20 @@
 
   box-shadow: 1px 1px rgb(146, 140, 140);
   padding: 1rem;
-  
+
   margin-top: 2rem;
 }
+.profile-pic {
+  height: 15rem;
+}
+.profile-edit-btn {
+  outline: none;
+  border: none;
+  box-shadow: 1px 1px rgb(174, 173, 171);
+}
+a {
+  text-decoration: none;
+}
+/* .homepage{
+  background-image: url("./images/homePic.jpg");
+} */

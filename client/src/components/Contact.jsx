@@ -1,8 +1,10 @@
 import React from "react";
+import Navbar from './Navbar'
 
 const Contact = () => {
   return (
     <>
+    <Navbar/>
       <div className="contact-info">
         <div className="container-fluid">
 
@@ -49,7 +51,7 @@ const Contact = () => {
         <div className="container">
           <div className="row">
             <div className="col-lg-10 offset-lg-1 shadow">
-              <div className="contact-form-container py-5">
+              <div className="contact-form-container py-4">
                 <div className="contact-form-title text-center">
                   Contact Us
                 </div>
