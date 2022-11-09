@@ -22,7 +22,7 @@ const Login = () => {
 
                 <div className="form-group ">
                   <label htmlFor="email">
-                    <i class="zmdi zmdi-email"></i>
+                    <i className="zmdi zmdi-email"></i>
                   </label>
                   <input
                     type="email"
@@ -35,7 +35,7 @@ const Login = () => {
 
                 <div className="form-group">
                   <label htmlFor="password">
-                    <i class="zmdi zmdi-lock"></i>
+                    <i className="zmdi zmdi-lock"></i>
                   </label>
                   <input
                     type="password"
