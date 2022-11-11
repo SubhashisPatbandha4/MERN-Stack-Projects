@@ -1,11 +1,41 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import aboutusPic from "../images/aboutusPic.jpg"
 import Navbar from './Navbar'
 
 const About = () => {
+  const navigate = useNavigate()
+  const callAboutPage = async () => {
+    try {
+      const res = await fetch("/about", {
+        method: "GET",
+        headers: {
+          Accept: "appllication/json",
+          "Content-Type": "application/json"
+        },
+        credentials: "include"
+      })
+      const data = await res.json()
+      console.log(data)
+      if (!res.status === 200) {    
+        const error = new Error(res.error)
+        throw error
+      }
+
+
+    } catch (error) {
+      console.log(error)
+      navigate("/login")
+    }
+  }
+  useEffect(() => {//we cant use async function inside the useEffect
+    callAboutPage()
+  }, []);
+
+
   return (
     <>
-    <Navbar />
+      <Navbar />
       <div className="container shadow-sm">
         <form method>
           <div className="row">

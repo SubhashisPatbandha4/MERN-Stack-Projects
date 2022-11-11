@@ -3,6 +3,7 @@ const express = require("express");
 const User = require("../model/userSchema");
 const bcrypt = require("bcryptjs")
 const router = express.Router();
+const authenticate = require("../middleware/authenticate")
 
 router.get("/", (req, resp) => {
   console.log("homepage");
@@ -55,19 +56,26 @@ router.post("/register", async (req, resp) => {
       return resp
         .status(422)
         .json({ error: "please enter both the password same" });
-    } else {
+    }
+    else if (name == "" || email == "" || phone == "" || work == "") {
+      return resp
+        .status(422)
+        .json({ error: "please enter all fields" });
+    }
+    else {
       const user = new User({ name, email, phone, work, password, cpassword });
 
       await user.save();
       return resp.status(201).json({ message: "Registration Successful" });
     }
   } catch (err) {
+    return resp.status(422);
     console.log(err);
   }
 });
 
 // login route
-router.post("/login", async (req, resp) => {
+router.post("/signin", async (req, resp) => {
   // console.log(req.body);
   // resp.json(req.body  );
   try {
@@ -79,7 +87,7 @@ router.post("/login", async (req, resp) => {
     if (userLogin) {
       const isMatch = await bcrypt.compare(password, userLogin.password);
       const token = await userLogin.generateAuthToken() //getting genereted token of logged in user
-      console.log(token)
+      // console.log(token)
       resp.cookie("jwtoken", token, {
         expires: new Date(Date.now() + 25892000000),//mili seconds =30 days
         httpOnly: true //to run it on normal http without secure also
@@ -98,4 +106,8 @@ router.post("/login", async (req, resp) => {
     console.log(e);
   }
 });
+router.get("/about", authenticate, (req, resp) => {
+  console.log("hello my about")
+  resp.send(req.loginUser)
+})
 module.exports = router;
