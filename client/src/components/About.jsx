@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import aboutusPic from "../images/aboutusPic.jpg"
 import Navbar from './Navbar'
 
 const About = () => {
   const navigate = useNavigate()
+  const [userData, setUserData] = useState({})
   const callAboutPage = async () => {
     try {
       const res = await fetch("/about", {
@@ -17,7 +18,10 @@ const About = () => {
       })
       const data = await res.json()
       console.log(data)
-      if (!res.status === 200) {    
+      setUserData(data)
+      // window.alert(data.name)
+
+      if (!res.status === 200) {
         const error = new Error(res.error)
         throw error
       }
@@ -44,7 +48,7 @@ const About = () => {
             </div>
             <div className="col-md-6">
               <div className="profile-head">
-                <h5>Subhashis Patbandha</h5>
+                <h5>{userData.name}</h5>
                 <h3 className="h3 text-primary ">Web developer</h3>
                 <p className="profile-rating mt-3 mb-5 abs">Rankings: <span>1/10</span> </p>
                 <ul className="nav nav-pills mb-3" id="pills-tab" role="tablist">
@@ -99,7 +103,7 @@ const About = () => {
                       <label>Name</label>
                     </div>
                     <div className="col-sm-6 text-primary ">
-                      <p>Subhashis Patbandha</p>
+                      <p>{userData.name}</p>
                     </div>
 
                   </div>
@@ -109,7 +113,7 @@ const About = () => {
                       <label>Email</label>
                     </div>
                     <div className="col-sm-6 text-primary ">
-                      <p>Subh@gmail</p>
+                      <p>{userData.email}</p>
                     </div>
 
                   </div>
@@ -119,7 +123,7 @@ const About = () => {
                       <label>Phone</label>
                     </div>
                     <div className="col-sm-6 text-primary ">
-                      <p>1232123212</p>
+                      <p>{userData.phone}</p>
                     </div>
 
                   </div>
@@ -129,7 +133,7 @@ const About = () => {
                       <label>Profession</label>
                     </div>
                     <div className="col-sm-6 text-primary ">
-                      <p>MERN Developer</p>
+                      <p>{userData.work}</p>
                     </div>
 
                   </div>
