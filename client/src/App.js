@@ -1,4 +1,4 @@
-import React, { createContext } from 'react'
+import React, { createContext, useReducer } from 'react'
 import "./App.css"
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './components/Home'
@@ -9,10 +9,13 @@ import Login from './components/Login'
 import Logout from './components/Logout'
 import Pagenotfound from './components/Pagenotfound'
 
-const UserContext = createContext();
+import { initialState, reducer } from './reducer/useReducer';
+
+export const UserContext = createContext();
 
 const Routing = () => {
   return (
+
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/about" element={<About />} />
@@ -23,12 +26,13 @@ const Routing = () => {
       <Route path="*" element={<Pagenotfound />} />
 
     </Routes>
+
   )
 }
 
 
 const App = () => {
-  const [state, dispatch] = useReducer(reducer, initialState, init)
+  const [state, dispatch] = useReducer(reducer, initialState)
   return (
     <div>
       <Router>

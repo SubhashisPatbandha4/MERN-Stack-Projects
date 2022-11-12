@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { NavLink, useNavigate } from "react-router-dom"
 import loginCOVER from "../images/loginCover.jpg"
 import Navbar from './Navbar'
-
+import { UserContext } from "../App";
 const Login = () => {
+
+  const { state, dispatch } = useContext(UserContext)
+
+
+
   const navigate = useNavigate()
 
   const [email, setEmail] = useState('')
@@ -24,6 +29,7 @@ const Login = () => {
       console.log("invalid Login")
     }
     else {
+      dispatch({ type: "USER", payload: true })
       window.alert(" Login Successful")
       console.log(" Login Successful")
       navigate("/")
