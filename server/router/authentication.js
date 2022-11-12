@@ -116,25 +116,30 @@ router.get("/getData", authenticate, (req, resp) => {
 })
 router.post("/contact", authenticate, async (req, resp) => {
   console.log("hello my contact ")
-  try  {
+  try {
     const { name, email, phone, message } = req.body
     if (!name || !email || !phone || !message) {
-      
+
 
       console.log("error in contact form")
       return resp.json({ error: "please fill the contact form" })
     }
-      const userContact = await User.findOne({ _id: req.userID })
-      if (userContact) {
-        const userMessage = await userContact.addMessage(name, email, phone, message);
-        await userContact.save()
-    
-        resp.status(201).json({ message: "user contact successfully" })
-      }
-    
+    const userContact = await User.findOne({ _id: req.userID })
+    if (userContact) {
+      const userMessage = await userContact.addMessage(name, email, phone, message);
+      await userContact.save()
+
+      resp.status(201).json({ message: "user contact successfully" })
+    }
+
   } catch (error) {
     console.log(error)
- 
+
   }
+})
+// logout page
+router.get("/logout", (req, resp) => {
+  resp.clearCookie("jwtoken",{path:"/"})
+  resp.status(200).send("userLogout")
 })
 module.exports = router;

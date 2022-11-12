@@ -52,8 +52,8 @@ const Contact = () => {
         name, email, phone, message
       })
     })
-    const data = await res.json()
-    if (res.status != 201) {
+    await res.json()
+    if (res.status !== 201) {
 
       window.alert("Please fill all the details")
       console.log("message not send")
