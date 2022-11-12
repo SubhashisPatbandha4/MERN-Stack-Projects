@@ -1,10 +1,72 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from './Navbar'
 
 const Contact = () => {
+
+  const [userData, setUserData] = useState({ name: "", email: "", phone: "", message: "" })
+  const callContactPage = async () => {
+    try {
+      const res = await fetch("/getData", {
+        method: "GET",
+        headers: {
+
+          "Content-Type": "application/json"
+        },
+
+      })
+      const data = await res.json()
+      console.log(data)
+      setUserData({ ...userData, name: data.name, email: data.email, phone: data.phone, message: data.message })
+
+
+      if (!res.status === 200) {
+        const error = new Error(res.error)
+        throw error
+      }
+
+
+    } catch (error) {
+      console.log(error)
+      // navigate("/login")
+    }
+  }
+  useEffect(() => {//we cant use async function inside the useEffect
+    callContactPage()
+  }, []);
+
+  const handleInput = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setUserData({ ...userData, [name]: value })
+  }
+  //send the data to the backend
+  const postData = async (e) => {
+    e.preventDefault();
+    const { name, email, phone, message } = userData;
+    const res = await fetch("/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({//name:name 1st one is database field and 2nd is the field where user enters the value
+        name, email, phone, message
+      })
+    })
+    const data = await res.json()
+    if (res.status != 201) {
+
+      window.alert("Please fill all the details")
+      console.log("message not send")
+    }
+
+    else {
+      window.alert("Message send Successfully")
+      setUserData({ ...userData, message: "" })
+    }
+  }
   return (
     <>
-    <Navbar/>
+      <Navbar />
       <div className="contact-info">
         <div className="container-fluid">
 
@@ -55,17 +117,17 @@ const Contact = () => {
                 <div className="contact-form-title text-center">
                   Contact Us
                 </div>
-                <form id="contact-form">
+                <form method="POST" id="contact-form">
                   <div className="contact-form-content row mx-auto d-flex justify-content-between ">
-                    <input type="text" id="contact-form-name" className="contact-form-name input-field col-sm-3 " placeholder="your name" required='true' />
-                    <input type="email" id="contact-form-email" className="contact-form-email input-field col-sm-3" placeholder="your email" required='true' />
-                    <input type="number" id="contact-form-number" className="contact-form-number input-field col-sm-3" placeholder="your number" required='true' />
+                    <input type="text" id="contact-form-name" className="contact-form-name input-field col-sm-3 " onChange={handleInput} name="name" value={userData.name} placeholder="your name" required='true' />
+                    <input type="email" id="contact-form-email" className="contact-form-email input-field col-sm-3" onChange={handleInput} name="email" value={userData.email} placeholder="your email" required='true' />
+                    <input type="number" id="contact-form-number" className="contact-form-number input-field col-sm-3" onChange={handleInput} name="phone" value={userData.phone} placeholder="your number" required='true' />
 
                     <div className="contact-form-text mt-5 col-sm-12">
-                      <textarea name="textarea" id="" className="col-sm-12" placeholder="Message" cols="30" rows="10" ></textarea>
+                      <textarea onChange={handleInput} name="message" value={userData.message} id="" className="col-sm-12" placeholder="Message" cols="30" rows="10" ></textarea>
                     </div>
                     <div className="contact-form-btn">
-                      <button type="submit" className="btn btn-primary p-2">Send Message</button>
+                      <button type="submit" onClick={postData} className="btn btn-primary p-2">Send Message</button>
                     </div>
                   </div>
                 </form>

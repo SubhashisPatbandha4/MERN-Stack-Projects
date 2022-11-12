@@ -110,4 +110,31 @@ router.get("/about", authenticate, (req, resp) => {
   console.log("hello my about")
   resp.send(req.loginUser)
 })
+router.get("/getData", authenticate, (req, resp) => {
+  console.log("hello my getData ")
+  resp.send(req.loginUser)
+})
+router.post("/contact", authenticate, async (req, resp) => {
+  console.log("hello my contact ")
+  try  {
+    const { name, email, phone, message } = req.body
+    if (!name || !email || !phone || !message) {
+      
+
+      console.log("error in contact form")
+      return resp.json({ error: "please fill the contact form" })
+    }
+      const userContact = await User.findOne({ _id: req.userID })
+      if (userContact) {
+        const userMessage = await userContact.addMessage(name, email, phone, message);
+        await userContact.save()
+    
+        resp.status(201).json({ message: "user contact successfully" })
+      }
+    
+  } catch (error) {
+    console.log(error)
+ 
+  }
+})
 module.exports = router;
