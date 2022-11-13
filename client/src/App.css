@@ -1,0 +1,63 @@
+.navlogo {
+  height: 3rem;
+}
+.form-group {
+  margin-top: 2rem;
+  box-shadow: 1px 1px #888888;
+}
+
+.form-group input {
+  margin-left: 1rem;
+  border: none;
+  outline: none;
+  width: 90%;
+}
+.form-group input:focus {
+  background-color: beige;
+}
+.signup-coverImage {
+  height: 500px;
+}
+.signup-image-link {
+  /* color: blueviolet; */
+  text-decoration: none;
+}
+.contact-info-item {
+  margin-left: auto;
+  margin-top: 2rem;
+  /* background-color: red; */
+  padding: 1rem;
+  padding-left: 1rem;
+}
+.contact-info-contact {
+  margin-left: 1rem;
+
+  word-break: break-all;
+}
+.contact-form-message {
+  width: 100%;
+  word-break: break-all;
+}
+.input-field {
+  outline: none;
+  border: none;
+
+  box-shadow: 1px 1px rgb(146, 140, 140);
+  padding: 1rem;
+
+  margin-top: 2rem;
+}
+.profile-pic {
+  height: 15rem;
+}
+.profile-edit-btn {
+  outline: none;
+  border: none;
+  box-shadow: 1px 1px rgb(174, 173, 171);
+}
+a {
+  text-decoration: none;
+}
+/* .homepage{
+  background-image: url("./images/homePic.jpg");
+} */
