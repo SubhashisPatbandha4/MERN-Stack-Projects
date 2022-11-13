@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { UserContext } from "../App";
 import navlogo from "../images/navlogo.png";
 
-const navbar = () => {
+const Navbar = () => {
   const { state, dispatch } = useContext(UserContext)
   const RenderMenu = () => {
     if (state) {
@@ -92,4 +92,4 @@ const navbar = () => {
   );
 };
 
-export default navbar;
+export default Navbar;
